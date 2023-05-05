@@ -1,6 +1,10 @@
 package uinput
 
-import "github.com/bendahl/uinput"
+import (
+	"fmt"
+
+	"github.com/bendahl/uinput"
+)
 
 type Keyboard struct {
 	uinput.Keyboard
@@ -20,10 +24,13 @@ func NewKeyboard() *Keyboard {
 func (kb *Keyboard) Close() error { return kb.Keyboard.Close() }
 
 func (kb *Keyboard) AltTab() *Keyboard {
+	fmt.Printf("pressing left alt...\n")
 	kb.KeyDown(uinput.KeyLeftalt)
 	WaitSeconds(1)
+	fmt.Printf("pressing tab...\n")
 	kb.KeyPress(uinput.KeyTab)
-	WaitSeconds(1)
+	WaitSeconds(4)
 	kb.KeyUp(uinput.KeyLeftalt)
+	fmt.Printf("releasing left alt...\n")
 	return kb
 }
